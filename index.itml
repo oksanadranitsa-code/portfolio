@@ -1,0 +1,1391 @@
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Драница Оксана — портфолио бухгалтера</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #4f8cf7;
+            --accent-light: #7aa9ff;
+            --accent-glow: rgba(79, 140, 247, 0.25);
+
+            /* dark theme — фон светлее, текст контрастнее */
+            --bg: #131820;
+            --surface: #1c232e;
+            --surface-2: #242d3a;
+            --surface-3: #2e3846;
+            --text: #f2f6fb;
+            --text-secondary: #c2cfdd;
+            --text-muted: #8b9aab;
+            --border: #3a4555;
+            --border-light: #465365;
+            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            --tag-bg: #28313d;
+            --tag-border: #3d4a5c;
+            --gradient-start: #4f8cf7;
+            --gradient-mid: #8b5cf6;
+            --gradient-end: #ec4899;
+            --transition-speed: 0.6s;
+
+            --glass-bg: rgba(28, 35, 46, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.18);
+        }
+
+        /* ---------- LIGHT THEME ---------- */
+        [data-theme="light"] {
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --accent-glow: rgba(37, 99, 235, 0.14);
+
+            --bg: #dfe5ee;
+            --surface: #ffffff;
+            --surface-2: #eef2f8;
+            --surface-3: #e2e8f2;
+            --text: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border: #c3cddb;
+            --border-light: #d4dce8;
+            --card-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+            --tag-bg: #e6ecf5;
+            --tag-border: #c8d2e0;
+
+            --gradient-start: #2563eb;
+            --gradient-mid: #7c3aed;
+            --gradient-end: #db2777;
+
+            --glass-bg: rgba(255, 255, 255, 0.62);
+            --glass-border: rgba(37, 99, 235, 0.22);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            transition: background 0.35s ease, color 0.35s ease;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ---------- TOP BAR: centered, larger ---------- */
+        .topbar {
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 72px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            z-index: 30;
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+
+        [data-theme="light"] .topbar {
+            box-shadow: 0 1px 0 var(--border), 0 2px 8px rgba(15, 23, 42, 0.04);
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.6rem, 4.2vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(120deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.15;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        .brand-role {
+            margin-top: 4px;
+            font-size: clamp(0.78rem, 1.5vw, 0.95rem);
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        .topbar-actions {
+            position: absolute;
+            top: 50%;
+            right: 24px;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 4px 5px;
+            cursor: pointer;
+            transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .theme-toggle .toggle-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            transition: background 0.25s, color 0.25s;
+            color: var(--text-muted);
+            line-height: 1;
+            user-select: none;
+        }
+
+        .theme-toggle .toggle-icon.active {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 14px var(--accent-glow);
+        }
+
+        /* ---------- STAGE ---------- */
+        .stage {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel {
+            position: absolute;
+            inset: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 32px 24px 120px;
+            opacity: 0;
+            transform: translateX(60px) scale(0.985);
+            transition:
+                opacity var(--transition-speed) cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform var(--transition-speed) cubic-bezier(0.22, 0.61, 0.36, 1),
+                visibility 0s linear var(--transition-speed);
+            visibility: hidden;
+            pointer-events: none;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 8px;
+        }
+
+        .panel.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            visibility: visible;
+            pointer-events: auto;
+            transition-delay: 0s;
+        }
+
+        .panel.exit-left {
+            opacity: 0;
+            transform: translateX(-60px) scale(0.985);
+        }
+
+        .panel.exit-right {
+            opacity: 0;
+            transform: translateX(60px) scale(0.985);
+        }
+
+        .panel-enter-right {
+            transform: translateX(60px) scale(0.985);
+        }
+
+        .panel-enter-left {
+            transform: translateX(-60px) scale(0.985);
+        }
+
+        .panel-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .section-header .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 12px var(--accent-glow);
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.3rem, 3.4vw, 1.85rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 18px var(--accent-glow));
+        }
+
+        [data-theme="light"] .section-header h2 {
+            filter: none;
+        }
+
+        /* ---------- ABOUT ---------- */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .about-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px 32px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent), var(--gradient-mid), var(--gradient-end));
+            border-radius: 20px 0 0 20px;
+            opacity: 0.7;
+        }
+
+        .about-card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-card p + p {
+            margin-top: 12px;
+        }
+
+        .about-card .highlight {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .about-visual {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            isolation: isolate;
+        }
+
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, var(--accent-glow), transparent 55%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.14), transparent 55%);
+            z-index: -1;
+        }
+
+        .about-visual svg {
+            width: 100%;
+            max-width: 360px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
+            animation: floatY 6s ease-in-out infinite;
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .svg-paper { fill: var(--surface); stroke: var(--border-light); }
+        .svg-line { stroke: var(--border-light); }
+        .svg-accent { fill: var(--accent); }
+        .svg-accent-2 { fill: #8b5cf6; }
+        .svg-accent-3 { fill: #ec4899; }
+        .svg-text-line { stroke: var(--text-muted); opacity: 0.45; }
+
+        @media (min-width: 900px) {
+            .about-layout {
+                grid-template-columns: 1.25fr 1fr;
+            }
+        }
+
+        /* ---------- SKILLS ---------- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 26px 24px;
+            transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease,
+                        background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-glow), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25), 0 0 0 1px var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        [data-theme="light"] .skill-card:hover {
+            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18), 0 0 0 1px var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-card h3 .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--gradient-mid));
+            color: #fff;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .skill-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-card ul li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.55;
+        }
+
+        .skill-card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.7;
+        }
+
+        /* ---------- CASES ---------- */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .case-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 26px 24px 24px;
+            transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            opacity: 0.8;
+            border-radius: 18px 18px 0 0;
+        }
+
+        .case-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+            border-color: var(--border-light);
+        }
+
+        [data-theme="light"] .case-card:hover {
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+            border-color: var(--accent);
+        }
+
+        .case-card .case-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--gradient-mid));
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+
+        .case-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.35;
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-card ul {
+            list-style: none;
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-card ul li {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            padding-left: 22px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .case-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ---------- TAGS ---------- */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--tag-bg);
+            border: 1px solid var(--tag-border);
+            border-radius: 100px;
+            padding: 9px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.2s, box-shadow 0.25s;
+            cursor: default;
+            white-space: nowrap;
+        }
+
+        .tag:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px var(--accent-glow);
+        }
+
+        .tag .tag-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            transition: background 0.25s;
+        }
+
+        .tag:hover .tag-dot {
+            background: #fff;
+        }
+
+        /* ---------- DEV LIST ---------- */
+        .dev-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dev-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 22px;
+            transition: border-color 0.25s, background 0.25s, transform 0.2s;
+        }
+
+        .dev-item:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .dev-item .dev-marker {
+            flex-shrink: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--gradient-mid));
+            margin-top: 9px;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .dev-item span {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* ---------- BOTTOM NAV ---------- */
+        .navbar {
+            flex-shrink: 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            z-index: 30;
+            position: relative;
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+
+        [data-theme="light"] .navbar {
+            box-shadow: 0 -1px 0 var(--border), 0 -2px 8px rgba(15, 23, 42, 0.04);
+        }
+
+        .nav-track {
+            display: flex;
+            align-items: stretch;
+            gap: 2px;
+            padding: 6px;
+            max-width: 1120px;
+            margin: 0 auto;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            padding: 8px 6px;
+            min-width: 64px;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.68rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.25s, background 0.25s, transform 0.15s;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-btn .nav-icon {
+            font-size: 1.05rem;
+            line-height: 1;
+            transition: transform 0.25s;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-secondary);
+            background: var(--surface-2);
+        }
+
+        .nav-btn.active {
+            color: var(--accent);
+            background: var(--surface-2);
+        }
+
+        .nav-btn.active .nav-icon {
+            transform: scale(1.15);
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 3px;
+            border-radius: 3px 3px 0 0;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+            z-index: 31;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* ---------- ARROWS: bottom-center, glassy ---------- */
+        .arrow-dock {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 28;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .arrow-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 100px;
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+            backdrop-filter: blur(14px) saturate(140%);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: background 0.25s, border-color 0.25s, color 0.25s,
+                        transform 0.25s, box-shadow 0.3s, opacity 0.3s;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+            white-space: nowrap;
+        }
+
+        [data-theme="light"] .arrow-hint {
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+        }
+
+        .arrow-hint .arrow-glyph {
+            font-size: 1.2rem;
+            line-height: 1;
+            font-weight: 700;
+            color: var(--accent);
+            transition: transform 0.25s, color 0.25s;
+        }
+
+        .arrow-hint .arrow-label {
+            color: var(--text);
+        }
+
+        .arrow-hint:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        .arrow-hint:hover .arrow-glyph,
+        .arrow-hint:hover .arrow-label {
+            color: #fff;
+        }
+
+        .arrow-hint.prev:hover .arrow-glyph {
+            transform: translateX(-4px);
+        }
+
+        .arrow-hint.next:hover .arrow-glyph {
+            transform: translateX(4px);
+        }
+
+        .arrow-hint:disabled {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.92);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 640px) {
+            .topbar {
+                padding: 14px 64px;
+            }
+
+            .brand-name {
+                font-size: clamp(1.35rem, 6vw, 1.75rem);
+                white-space: normal;
+            }
+
+            .brand-role {
+                font-size: 0.72rem;
+                white-space: normal;
+            }
+
+            .topbar-actions {
+                right: 14px;
+            }
+
+            .panel {
+                padding: 20px 16px 128px;
+            }
+
+            .section-header {
+                margin-bottom: 20px;
+            }
+
+            .about-card {
+                padding: 22px 20px;
+            }
+
+            .skills-grid,
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-card,
+            .case-card {
+                padding: 22px 20px;
+            }
+
+            .tag {
+                font-size: 0.8rem;
+                padding: 8px 14px;
+            }
+
+            .nav-btn {
+                font-size: 0.6rem;
+                min-width: 56px;
+                padding: 6px 4px;
+            }
+
+            .nav-btn .nav-icon {
+                font-size: 0.95rem;
+            }
+
+            .arrow-dock {
+                bottom: 18px;
+                gap: 8px;
+            }
+
+            .arrow-hint {
+                padding: 12px 16px;
+                font-size: 0.82rem;
+            }
+
+            .arrow-hint .arrow-label {
+                display: none;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .skills-grid,
+            .cases-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .panel,
+            .skill-card,
+            .case-card,
+            .tag,
+            .dev-item,
+            .about-visual svg {
+                transition: none !important;
+                animation: none !important;
+            }
+
+            .panel {
+                transition: opacity 0.01s linear !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app">
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="brand">
+                <span class="brand-name">Драница Оксана</span>
+                <span class="brand-role">Ведущий бухгалтер · Внеоборотные активы · ФСБУ · AI</span>
+            </div>
+            <div class="topbar-actions">
+                <div class="theme-toggle" id="themeToggle" role="switch" aria-checked="true" aria-label="Переключить тему" tabindex="0">
+                    <span class="toggle-icon active" id="iconDark" aria-hidden="true">🌙</span>
+                    <span class="toggle-icon" id="iconLight" aria-hidden="true">☀️</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- STAGE -->
+        <div class="stage" id="stage">
+
+            <!-- ABOUT -->
+            <section class="panel active" data-index="0" data-name="О себе">
+                <div class="panel-inner">
+                    <div class="section-header">
+                        <span class="dot"></span>
+                        <h2>О себе</h2>
+                    </div>
+                    <div class="about-layout">
+                        <div class="about-card">
+                            <p>
+                                Ведущий бухгалтер по учёту внеоборотных активов на крупнейшем предприятии целлюлозно-бумажной промышленности. Специализируюсь на методологии и практике учёта <span class="highlight">капитальных вложений, основных средств и нематериальных активов</span> в соответствии с федеральными стандартами бухгалтерского учёта (ФСБУ). Обладаю опытом трансформации учётных процессов при переходе на новые стандарты и внедрении корпоративных информационных систем.
+                            </p>
+                            <p>
+                                Активно применяю <span class="highlight">AI-инструменты</span> для повышения эффективности аналитической работы и обработки данных.
+                            </p>
+                        </div>
+
+                        <div class="about-visual" aria-hidden="true">
+                            <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img">
+                                <defs>
+                                    <linearGradient id="gradAccent" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#4f8cf7"/>
+                                        <stop offset="100%" stop-color="#8b5cf6"/>
+                                    </linearGradient>
+                                    <linearGradient id="gradPink" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#8b5cf6"/>
+                                        <stop offset="100%" stop-color="#ec4899"/>
+                                    </linearGradient>
+                                </defs>
+
+                                <rect x="40" y="70" width="150" height="200" rx="18" class="svg-paper" stroke-width="2"/>
+                                <rect x="58" y="88" width="114" height="40" rx="8" fill="url(#gradAccent)" opacity="0.9"/>
+                                <text x="115" y="115" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="700" fill="#ffffff">1 024 000</text>
+                                <g class="svg-accent">
+                                    <rect x="58" y="146" width="26" height="26" rx="6"/>
+                                    <rect x="92" y="146" width="26" height="26" rx="6"/>
+                                    <rect x="126" y="146" width="26" height="26" rx="6"/>
+                                    <rect x="58" y="180" width="26" height="26" rx="6"/>
+                                    <rect x="92" y="180" width="26" height="26" rx="6"/>
+                                    <rect x="126" y="180" width="26" height="26" rx="6"/>
+                                </g>
+                                <g class="svg-accent-2">
+                                    <rect x="58" y="214" width="26" height="26" rx="6"/>
+                                    <rect x="92" y="214" width="26" height="26" rx="6"/>
+                                    <rect x="126" y="214" width="26" height="26" rx="6" fill="url(#gradPink)"/>
+                                </g>
+
+                                <g transform="translate(210, 40)">
+                                    <rect x="0" y="0" width="150" height="200" rx="14" class="svg-paper" stroke-width="2"/>
+                                    <rect x="0" y="0" width="150" height="34" rx="14" fill="url(#gradAccent)" opacity="0.95"/>
+                                    <rect x="0" y="20" width="150" height="14" fill="url(#gradAccent)" opacity="0.95"/>
+                                    <text x="18" y="23" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#ffffff">ОТЧЁТ</text>
+                                    <line x1="18" y1="58" x2="132" y2="58" class="svg-text-line" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="18" y1="78" x2="112" y2="78" class="svg-text-line" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="18" y1="98" x2="126" y2="98" class="svg-text-line" stroke-width="5" stroke-linecap="round"/>
+                                    <g transform="translate(20, 120)">
+                                        <rect x="0" y="40" width="18" height="30" rx="4" class="svg-accent"/>
+                                        <rect x="26" y="24" width="18" height="46" rx="4" class="svg-accent-2"/>
+                                        <rect x="52" y="10" width="18" height="60" rx="4" fill="url(#gradPink)"/>
+                                        <rect x="78" y="30" width="18" height="40" rx="4" class="svg-accent"/>
+                                        <line x1="-4" y1="72" x2="104" y2="72" stroke="var(--border-light)" stroke-width="2" stroke-linecap="round"/>
+                                    </g>
+                                </g>
+
+                                <g transform="translate(250, 250)">
+                                    <circle cx="0" cy="0" r="28" fill="url(#gradAccent)" opacity="0.95"/>
+                                    <circle cx="0" cy="0" r="28" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+                                    <text x="0" y="7" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="24" font-weight="700" fill="#ffffff">₽</text>
+                                </g>
+
+                                <circle cx="30" cy="40" r="4" class="svg-accent" opacity="0.8"/>
+                                <circle cx="370" cy="270" r="5" class="svg-accent-3" opacity="0.8"/>
+                                <circle cx="340" cy="30" r="3" class="svg-accent-2" opacity="0.7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SKILLS -->
+            <section class="panel" data-index="1" data-name="Навыки">
+                <div class="panel-inner">
+                    <div class="section-header">
+                        <span class="dot"></span>
+                        <h2>Ключевые компетенции</h2>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <h3><span class="icon">📋</span> Методология учёта ВА</h3>
+                            <ul>
+                                <li>Капитальные вложения — учёт, инвентаризация, оценка, признание в составе ОС</li>
+                                <li>Основные средства — поступление, перемещение, модернизация, реконструкция, выбытие, переоценка, обесценение</li>
+                                <li>Нематериальные активы — признание, амортизация, проверка на обесценение</li>
+                                <li>Арендованные активы — ФСБУ 25/2022 (ППА, обязательство по аренде)</li>
+                                <li>ФСБУ 6/2020 — перевод учёта ОС (лимит стоимости, амортизация, элементы, инвентаризация)</li>
+                                <li>ФСБУ 26/2022 — учёт капитальных вложений (признание, оценка, стоимость)</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <h3><span class="icon">🖥️</span> Учётные системы</h3>
+                            <ul>
+                                <li>1С:УПП — настройка и сопровождение учёта внеоборотных активов</li>
+                                <li>1С:ERP — внедрение, настройка, перевод учёта ОС и НМА, тестирование, обучение</li>
+                                <li>Google Таблицы — аналитические модели, сводные таблицы, автоматизация расчётов</li>
+                                <li>Excel — продвинутый уровень (формулы, сводные таблицы, Power Query, анализ данных)</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <h3><span class="icon">🤖</span> AI-инструменты</h3>
+                            <ul>
+                                <li>Промпт-инжиниринг — релевантные, диалоговые, последовательные, мультимодальные промты</li>
+                                <li>Поиск и обработка информации — нормативные документы, разъяснения Минфина</li>
+                                <li>Анализ отчётности — финансовая и управленческая отчётность, аналитические записки</li>
+                                <li>Работа с документами — тексты, таблицы, проверка договоров и ТЗ</li>
+                                <li>Верификация договоров — соответствие законодательству и внутренним регламентам</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACHIEVEMENTS -->
+            <section class="panel" data-index="2" data-name="Достижения">
+                <div class="panel-inner">
+                    <div class="section-header">
+                        <span class="dot"></span>
+                        <h2>Ключевые достижения</h2>
+                    </div>
+                    <div class="cases-grid">
+                        <div class="case-card">
+                            <div class="case-icon">📐</div>
+                            <h3>Перевод учёта ОС на ФСБУ 6/2020 и ФСБУ 26/2022</h3>
+                            <ul>
+                                <li>Разработка методологии перехода на новые стандарты учёта ОС и капитальных вложений</li>
+                                <li>Настройка учётных регистров и справочников в 1С:ERP под требования ФСБУ</li>
+                                <li>Проведение переоценки и классификации объектов ОС, определение элементов амортизации</li>
+                                <li>Обеспечение корректного переноса данных и формирования достоверной отчётности</li>
+                            </ul>
+                        </div>
+                        <div class="case-card">
+                            <div class="case-icon">⚙️</div>
+                            <h3>Внедрение и настройка 1С:УПП и 1С:ERP</h3>
+                            <ul>
+                                <li>Участие во внедрении и настройке модулей учёта внеоборотных активов</li>
+                                <li>Разработка и тестирование учётных сценариев для ОС, НМА, капитальных вложений</li>
+                                <li>Обучение пользователей работе с новым функционалом</li>
+                                <li>Сопровождение и консультационная поддержка после внедрения</li>
+                            </ul>
+                        </div>
+                        <div class="case-card">
+                            <div class="case-icon">📄</div>
+                            <h3>Учёт арендованного имущества по ФСБУ 25/2022</h3>
+                            <ul>
+                                <li>Настройка учёта прав пользования активами и обязательств по аренде</li>
+                                <li>Разработка методики расчёта дисконтированной стоимости и амортизации ППА</li>
+                                <li>Обеспечение корректного отражения арендных операций в отчётности</li>
+                            </ul>
+                        </div>
+                        <div class="case-card">
+                            <div class="case-icon">🧠</div>
+                            <h3>Применение AI-инструментов в учётной работе</h3>
+                            <ul>
+                                <li>Внедрение практики использования AI для анализа отчётности и аналитических записок</li>
+                                <li>Разработка библиотеки промптов для типовых задач бухгалтера</li>
+                                <li>Автоматизация рутинных операций с документами и таблицами с помощью AI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TOOLS -->
+            <section class="panel" data-index="3" data-name="Инструменты">
+                <div class="panel-inner">
+                    <div class="section-header">
+                        <span class="dot"></span>
+                        <h2>Инструменты и технологии</h2>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tag"><span class="tag-dot"></span>1С:УПП</span>
+                        <span class="tag"><span class="tag-dot"></span>1С:ERP</span>
+                        <span class="tag"><span class="tag-dot"></span>Excel (продвинутый)</span>
+                        <span class="tag"><span class="tag-dot"></span>Google Таблицы</span>
+                        <span class="tag"><span class="tag-dot"></span>Power Query</span>
+                        <span class="tag"><span class="tag-dot"></span>MS Word</span>
+                        <span class="tag"><span class="tag-dot"></span>Google Docs</span>
+                        <span class="tag"><span class="tag-dot"></span>ChatGPT</span>
+                        <span class="tag"><span class="tag-dot"></span>DeepSeek</span>
+                        <span class="tag"><span class="tag-dot"></span>Gemini</span>
+                        <span class="tag"><span class="tag-dot"></span>Мультимодальные модели</span>
+                        <span class="tag"><span class="tag-dot"></span>ЭДО</span>
+                        <span class="tag"><span class="tag-dot"></span>ФСБУ 6/2020</span>
+                        <span class="tag"><span class="tag-dot"></span>ФСБУ 26/2022</span>
+                        <span class="tag"><span class="tag-dot"></span>ФСБУ 25/2022</span>
+                        <span class="tag"><span class="tag-dot"></span>ФСБУ 14/2022</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DEVELOPMENT -->
+            <section class="panel" data-index="4" data-name="Развитие">
+                <div class="panel-inner">
+                    <div class="section-header">
+                        <span class="dot"></span>
+                        <h2>Направления развития</h2>
+                    </div>
+                    <div class="dev-list">
+                        <div class="dev-item">
+                            <span class="dev-marker"></span>
+                            <span>Углубление экспертизы в области МСФО и трансформации отчётности</span>
+                        </div>
+                        <div class="dev-item">
+                            <span class="dev-marker"></span>
+                            <span>Развитие навыков автоматизации учётных процессов (Python, скрипты для 1С)</span>
+                        </div>
+                        <div class="dev-item">
+                            <span class="dev-marker"></span>
+                            <span>Совершенствование AI-инструментов для аналитики и методологии учёта</span>
+                        </div>
+                        <div class="dev-item">
+                            <span class="dev-marker"></span>
+                            <span>Участие в разработке внутренних стандартов и регламентов учёта</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- arrows dock (bottom-center, glassy) -->
+            <div class="arrow-dock">
+                <button class="arrow-hint prev" id="arrowPrev" aria-label="Назад">
+                    <span class="arrow-glyph" aria-hidden="true">←</span>
+                    <span class="arrow-label">Назад</span>
+                </button>
+                <button class="arrow-hint next" id="arrowNext" aria-label="Далее">
+                    <span class="arrow-label">Далее</span>
+                    <span class="arrow-glyph" aria-hidden="true">→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <nav class="navbar">
+            <div class="progress-bar" id="progressBar" style="width: 20%;"></div>
+            <div class="nav-track" id="navTrack">
+                <button class="nav-btn active" data-target="0"><span class="nav-icon">👤</span>О себе</button>
+                <button class="nav-btn" data-target="1"><span class="nav-icon">🧩</span>Навыки</button>
+                <button class="nav-btn" data-target="2"><span class="nav-icon">🏆</span>Кейсы</button>
+                <button class="nav-btn" data-target="3"><span class="nav-icon">🛠️</span>Инструменты</button>
+                <button class="nav-btn" data-target="4"><span class="nav-icon">🚀</span>Развитие</button>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        /* ================= THEME ================= */
+        const html = document.documentElement;
+        const toggle = document.getElementById('themeToggle');
+        const iconDark = document.getElementById('iconDark');
+        const iconLight = document.getElementById('iconLight');
+
+        function setTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            const isDark = theme === 'dark';
+            toggle.setAttribute('aria-checked', isDark ? 'true' : 'false');
+            iconDark.classList.toggle('active', isDark);
+            iconLight.classList.toggle('active', !isDark);
+            try { localStorage.setItem('theme', theme); } catch (e) {}
+        }
+
+        (function initTheme() {
+            let stored = null;
+            try { stored = localStorage.getItem('theme'); } catch (e) {}
+            if (stored === 'light' || stored === 'dark') {
+                setTheme(stored);
+            } else {
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+        })();
+
+        function handleToggle() {
+            setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        }
+        toggle.addEventListener('click', handleToggle);
+        toggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleToggle();
+            }
+        });
+
+        /* ================= SLIDER ================= */
+        const panels = Array.from(document.querySelectorAll('.panel'));
+        const navBtns = Array.from(document.querySelectorAll('.nav-btn'));
+        const progressBar = document.getElementById('progressBar');
+        const arrowPrev = document.getElementById('arrowPrev');
+        const arrowNext = document.getElementById('arrowNext');
+
+        let current = 0;
+        let isAnimating = false;
+        const total = panels.length;
+        const TRANSITION_MS = 600;
+
+        panels.forEach((p, i) => {
+            if (i === 0) {
+                p.classList.add('active');
+            } else {
+                p.classList.add('panel-enter-right');
+            }
+        });
+
+        function updateNav(index) {
+            navBtns.forEach((b, i) => b.classList.toggle('active', i === index));
+            progressBar.style.width = ((index + 1) / total * 100) + '%';
+            arrowPrev.disabled = index === 0;
+            arrowNext.disabled = index === total - 1;
+        }
+
+        function goTo(target) {
+            if (target < 0 || target >= total || target === current || isAnimating) return;
+            isAnimating = true;
+
+            const direction = target > current ? 1 : -1;
+            const outgoing = panels[current];
+            const incoming = panels[target];
+
+            incoming.classList.remove('exit-left', 'exit-right', 'panel-enter-left', 'panel-enter-right', 'active');
+            incoming.style.transition = 'none';
+            void incoming.offsetWidth;
+            if (direction > 0) {
+                incoming.classList.add('panel-enter-right');
+            } else {
+                incoming.classList.add('panel-enter-left');
+            }
+
+            outgoing.classList.remove('panel-enter-left', 'panel-enter-right', 'exit-left', 'exit-right');
+            outgoing.classList.add('active');
+            outgoing.style.transition = '';
+
+            void outgoing.offsetWidth;
+            void incoming.offsetWidth;
+
+            requestAnimationFrame(() => {
+                incoming.classList.remove('panel-enter-right', 'panel-enter-left');
+                incoming.classList.add('active');
+                incoming.style.transition = '';
+
+                outgoing.classList.remove('active');
+                if (direction > 0) {
+                    outgoing.classList.add('exit-left');
+                } else {
+                    outgoing.classList.add('exit-right');
+                }
+            });
+
+            setTimeout(() => {
+                outgoing.classList.remove('exit-left', 'exit-right', 'active');
+                if (panels.indexOf(outgoing) < target) {
+                    outgoing.classList.add('panel-enter-right');
+                } else {
+                    outgoing.classList.add('panel-enter-left');
+                }
+                incoming.classList.remove('panel-enter-right', 'panel-enter-left');
+                incoming.classList.add('active');
+                isAnimating = false;
+            }, TRANSITION_MS + 40);
+
+            current = target;
+            updateNav(current);
+        }
+
+        navBtns.forEach((btn, i) => {
+            btn.addEventListener('click', () => goTo(i));
+        });
+
+        arrowPrev.addEventListener('click', () => goTo(current - 1));
+        arrowNext.addEventListener('click', () => goTo(current + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+                e.preventDefault();
+                goTo(current - 1);
+            } else if (e.key === 'ArrowRight') {
+                if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+                e.preventDefault();
+                goTo(current + 1);
+            }
+        });
+
+        (function initSwipe() {
+            const stage = document.getElementById('stage');
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let tracking = false;
+            const THRESHOLD = 50;
+
+            stage.addEventListener('touchstart', (e) => {
+                if (e.touches.length !== 1) return;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                tracking = true;
+            }, { passive: true });
+
+            stage.addEventListener('touchend', (e) => {
+                if (!tracking) return;
+                tracking = false;
+                if (e.changedTouches.length !== 1) return;
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                const dy = e.changedTouches[0].clientY - touchStartY;
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > THRESHOLD) {
+                    if (dx < 0) {
+                        goTo(current + 1);
+                    } else {
+                        goTo(current - 1);
+                    }
+                }
+            }, { passive: true });
+        })();
+
+        updateNav(0);
+    </script>
+</body>
+</html>
